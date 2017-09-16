@@ -27,8 +27,8 @@ try {
 
     $stmt1->bindColumn(2, $startDate);
     $stmt1->bindColumn(3, $endDate);
-    $stmt1->bindColumn(4, $holStart);
-    $stmt1->bindColumn(5, $holEnd);
+    $stmt1->bindColumn(4, $breakStart);
+    $stmt1->bindColumn(5, $breakEnd);
     $stmt1->bindColumn(6, $semNum);
 
     $stmt1->fetch();
@@ -37,10 +37,10 @@ try {
     $startYear = $startDate->format('Y');
     $end = new DateTime($endDate);
     $endDay = $end->format('l, d M');
-    $holStart = new DateTime($holStart);
-    $holEnd = new DateTime($holEnd);
-    $holFinish = $holEnd->format('l, d M Y');
-    $theseHols = $holStart->format('l, d M') . " to {$holFinish}";
+    $breakStart = new DateTime($breakStart);
+    $breakEnd = new DateTime($breakEnd);
+    $holFinish = $breakEnd->format('l, d M Y');
+    $theseHols = $breakStart->format('l, d M') . " to {$holFinish}";
 
     //Set up assignments table
     $sql = "SELECT c.courseName, a.name, a.duration, a.weekDue, a.dayDue  FROM Assignment a

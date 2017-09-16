@@ -43,8 +43,8 @@ try {
         semID       INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         startDate   DATE NOT NULL,
         endDate     DATE NOT NULL,
-        holStart    DATE NOT NULL,
-        holEnd      DATE NOT NULL,
+        breakStart    DATE NOT NULL,
+        breakEnd      DATE NOT NULL,
         semNum      INT(2) NOT NULL
     )";
     $pdo->exec($sql);
@@ -92,7 +92,7 @@ try {
     $name = "Professional Practice 1";
     $stmt->execute();
 
-    $sql = "INSERT INTO Semester (startDate, endDate, holStart, holEnd, semNum)
+    $sql = "INSERT INTO Semester (startDate, endDate, breakStart, breakEnd, semNum)
     VALUES (:start, :end, :hStart, :hEnd, :num)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':start', $start);

@@ -36,12 +36,12 @@ include 'inc/head.html.php';
             </div>
             <div class="large-3 columns">
                 <label>Start date (a Monday):
-                    <input type="date" name="holStart" value="" />
+                    <input type="date" name="breakStart" value="" />
                 </label>
             </div>
             <div class="large-3 columns">
                 <label>End date (a Friday):
-                    <input type="date" name="holEnd" value="" />
+                    <input type="date" name="breakEnd" value="" />
                 </label>
             </div>
             <div class="large-3 large-offset-3 columns">
@@ -69,10 +69,10 @@ include 'inc/head.html.php';
                 $startYear = $startDate->format('Y');
                 $end = new DateTime($endDate);
                 $endDay = $end->format('l, d M');
-                $holStart = new DateTime($holStart);
-                $holEnd = new DateTime($holEnd);
-                $holFinish = $holEnd->format('l, d M Y');
-                $theseHols = $holStart->format('l, d M') . " to {$holFinish}";
+                $breakStart = new DateTime($breakStart);
+                $breakEnd = new DateTime($breakEnd);
+                $holFinish = $breakEnd->format('l, d M Y');
+                $theseHols = $breakStart->format('l, d M') . " to {$holFinish}";
                 ?>
                 <tr>
                     <td><?= $semNum; ?>, <?= $startYear; ?></td>

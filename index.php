@@ -63,7 +63,7 @@ include 'inc/head.html.php';
             //Use day of the week and week number to find due date
             $dateString = $startDate->format('d-m-Y') . '+' . ($aWeek - 1) . ' weeks'; // start date plus assignment week due
             $aDueWeek = new DateTime($dateString);
-            if ($aDueWeek->getTimestamp() > $holEnd->getTimestamp()) {
+            if ($aDueWeek->getTimestamp() > $breakEnd->getTimestamp()) {
                 $aDueWeek->modify('+ 2 weeks');
             } 
             if ($aDayDue != 'Monday') {
@@ -103,7 +103,7 @@ include 'inc/head.html.php';
         //echo $holDate;
         for ($i = $startDate; $i < $end; $i->modify('+7 days')) { //loop over weeks of the semester
             //only deal with teaching weeks
-            if ($i->getTimestamp() < $holStart->getTimestamp() || $i->getTimestamp() > $holEnd->getTimestamp()) { 
+            if ($i->getTimestamp() < $breakStart->getTimestamp() || $i->getTimestamp() > $breakEnd->getTimestamp()) { 
                 $week ++; //New week ?>
                 <tr>
                     <td><?= $week; ?></td>

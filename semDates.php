@@ -16,7 +16,7 @@ include 'inc/connect.inc.php'; //connection details (keep secure)
 try {
     if (isset($_POST['addSem'])) {
         //Add the specified semester details to the database
-        $sql = "INSERT INTO Semester (startDate, endDate, holStart, holEnd, semNum)
+        $sql = "INSERT INTO Semester (startDate, endDate, breakStart, breakEnd, semNum)
         VALUES (:start, :end, :hStart, :hEnd, :num)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':start', $start);
@@ -27,8 +27,8 @@ try {
 
         $start = $_POST['semStart']; // a date
         $end = $_POST['semEnd']; // a date
-        $hStart = $_POST['holStart']; // a date
-        $hEnd = $_POST['holEnd']; // a date
+        $hStart = $_POST['breakStart']; // a date
+        $hEnd = $_POST['breakEnd']; // a date
         $num = $_POST['semNum']; // a number (semester 1 or 2)
         $stmt->execute();
     }
@@ -39,8 +39,8 @@ try {
 
     $stmt1->bindColumn(2, $startDate);
     $stmt1->bindColumn(3, $endDate);
-    $stmt1->bindColumn(4, $holStart);
-    $stmt1->bindColumn(5, $holEnd);
+    $stmt1->bindColumn(4, $breakStart);
+    $stmt1->bindColumn(5, $breakEnd);
     $stmt1->bindColumn(6, $semNum);
 
     $now = new DateTime();
