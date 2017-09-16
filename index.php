@@ -95,13 +95,11 @@ include 'inc/head.html.php';
             <th>Holiday</th>
         </tr>
         <?php 
-       // $stmt3->fetchAll(PDO::FETCH_BOUND);
         $week = 0;
         $arrayHol = array();
         while ($stmt3->fetch(PDO::FETCH_BOUND)) {
             $arrayHol[$holName] = $holDate;
-        }        
-        //$holiday = new DateTime($holDate);
+        }
         //echo $holDate;
         for ($i = $startDate; $i < $end; $i->modify('+7 days')) { //loop over weeks of the semester
             if ($i->getTimestamp() < $holStart->getTimestamp() || $i->getTimestamp() > $holEnd->getTimestamp()) { //only deal with teaching weeks
@@ -113,15 +111,12 @@ include 'inc/head.html.php';
                         <?php 
                         $iEnd = new DateTime($i->format('d-m-Y') . ' + 7 days');
 
-
-
                         foreach ($arrayHol as $holName => $holDate) { //Check if there's a public holiday this week
-                         
                             $holiday = new DateTime($holDate);
-                            if ($holiday->getTimestamp() >= $i->getTimestamp() && $holiday->getTimestamp() <= $iEnd->getTimestamp()) {
-                               echo "{$holName}, {$holiday->format('l d M')}"; // give the name and date of the holiday
+                            if ($holiday->getTimestamp() > $i->getTimestamp() && $holiday->getTimestamp() <= $iEnd->getTimestamp()) {
+                               echo "{$holName}, {$holiday->format('l d M')} "; // give the name and date of the holiday
                            }
-                        }  ?>
+                        } ?>
                     </td>
                     <?php 
                 } else { ?>
