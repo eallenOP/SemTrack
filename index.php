@@ -113,7 +113,7 @@ include 'inc/head.html.php';
 
                         foreach ($arrayHol as $holName => $holDate) { //Check if there's a public holiday this week
                             $holiday = new DateTime($holDate);
-                            if ($holiday->getTimestamp() > $i->getTimestamp() && $holiday->getTimestamp() <= $iEnd->getTimestamp()) {
+                            if ($holiday->getTimestamp() >= $i->getTimestamp() && $holiday->getTimestamp() < $iEnd->getTimestamp()) {
                                echo "{$holName}, {$holiday->format('l d M')} "; // give the name and date of the holiday
                            }
                         } ?>
