@@ -102,23 +102,24 @@ include 'inc/head.html.php';
         }
         //echo $holDate;
         for ($i = $startDate; $i < $end; $i->modify('+7 days')) { //loop over weeks of the semester
-            if ($i->getTimestamp() < $holStart->getTimestamp() || $i->getTimestamp() > $holEnd->getTimestamp()) { //only deal with teaching weeks
+            //only deal with teaching weeks
+            if ($i->getTimestamp() < $holStart->getTimestamp() || $i->getTimestamp() > $holEnd->getTimestamp()) { 
                 $week ++; //New week ?>
                 <tr>
                     <td><?= $week; ?></td>
                     <td><?= $i->format('d M'); //Print out Monday's date ?></td>
                     <td>
                         <?php 
-                        $iEnd = new DateTime($i->format('d-m-Y') . ' + 7 days');
-
-                        foreach ($arrayHol as $holName => $holDate) { //Check if there's a public holiday this week
+                        //Check if there's a public holiday this week
+                        $iEnd = new DateTime($i->format('d-m-Y') . ' + 7 days'); //Set Sunday
+                        foreach ($arrayHol as $holName => $holDate) { 
                             $holiday = new DateTime($holDate);
                             if ($holiday->getTimestamp() >= $i->getTimestamp() && $holiday->getTimestamp() < $iEnd->getTimestamp()) {
                                echo "{$holName}, {$holiday->format('l d M')} "; // give the name and date of the holiday
                            }
                         } ?>
                     </td>
-                    <?php 
+                <?php 
                 } else { ?>
                     <td></td>
                     <td><?= $i->format('d M'); //Print out Monday's date ?></td>
