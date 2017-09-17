@@ -52,7 +52,7 @@ try {
 
     $stmt2->bindColumn(1, $cName);
     $stmt2->bindColumn(2, $aName);
-    $stmt2->bindColumn(3, $aStart); //duration
+    $stmt2->bindColumn(3, $aStart); //duration indicates assignment start date
     $stmt2->bindColumn(4, $aWeek);
     $stmt2->bindColumn(5, $aDayDue);
 
