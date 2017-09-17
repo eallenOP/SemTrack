@@ -64,9 +64,12 @@ try {
     $stmt3->bindColumn(1, $holName);
     $stmt3->bindColumn(2, $holDate);
 
+    $week = 0;
+    $arrayHol = array();
+    while ($stmt3->fetch(PDO::FETCH_BOUND)) {
+        $arrayHol[$holName] = $holDate;
+    }
  
-    // $holiday = new DateTime($holDate);
-
     //Set up semester pick drop down
     $sql = "SELECT semID, YEAR(startDate), semNum FROM Semester";
     $stmt4 = $pdo->prepare($sql);

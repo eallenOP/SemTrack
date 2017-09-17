@@ -95,13 +95,8 @@ include 'inc/head.html.php';
             <th>Holiday</th>
         </tr>
         <?php 
-        $week = 0;
-        $arrayHol = array();
-        while ($stmt3->fetch(PDO::FETCH_BOUND)) {
-            $arrayHol[$holName] = $holDate;
-        }
-        //echo $holDate;
-        for ($i = $startDate; $i < $end; $i->modify('+7 days')) { //loop over weeks of the semester
+        //Loop over weeks of the semester
+        for ($i = $startDate; $i < $end; $i->modify('+7 days')) { 
             //only deal with teaching weeks
             if ($i->getTimestamp() < $breakStart->getTimestamp() || $i->getTimestamp() > $breakEnd->getTimestamp()) { 
                 $week ++; //New week ?>
