@@ -11,6 +11,8 @@ inc/error.html.php
 index.php
 */
 
+date_default_timezone_set('Pacific/Auckland');
+
 include 'inc/connect.inc.php'; //connection details (keep secure)
 
 try {
@@ -52,17 +54,16 @@ try {
 
     $stmt->fetch();
     $thisSemStartDate = new DateTime($thisSemStartDate);
-    $today = new DateTime();
+    $now = new DateTime();
+    $today = $now->format('l');
     $weekNumber = 0;
 
-    for ($i = $thisSemStartDate; $i < $today; $i->modify('+7 days')) { //loop over weeks of the semester
+    for ($i = $thisSemStartDate; $i < $now; $i->modify('+7 days')) { //loop over weeks of the semester
         //only deal with teaching weeks
         if ($i->getTimestamp() < $breakStart->getTimestamp() || $i->getTimestamp() > $breakEnd->getTimestamp()) { 
             $weekNumber++; //New week 
         }
     }
-
-    $today = $today->format('l');
 
     //Set up assignments table
     $sql = "SELECT c.courseName, a.name, a.duration, a.weekDue, a.dayDue  FROM Assignment a
