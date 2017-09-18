@@ -3,6 +3,13 @@ include 'inc/head.html.php';
 ?>
 
 <div class="row">
+    <br>
+    <div class="large-12 columns alert-box secondary">
+        <h4>Welcome to Semester Tracker</h4>
+        <p>It's currently <?= $today; ?> of week <?= $weekNumber; ?></p>
+    </div>
+</div>
+<div class="row">
     <h1>Semester Calendar</h1>
 </div>
 <div class="row">
