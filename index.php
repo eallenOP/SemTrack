@@ -4,7 +4,7 @@ include 'inc/head.html.php';
 
 <div class="row">
     <br>
-    <div class="large-12 columns alert-box secondary">
+    <div class="panel callout radius">
         <h4>Welcome to Semester Tracker</h4>
         <p>It's currently <?= $today; ?> of week <?= $weekNumber; ?></p>
     </div>
