@@ -11,9 +11,12 @@ inc/error.html.php
 index.php
 */
 
+date_default_timezone_set('Pacific/Auckland');
+
 include 'inc/connect.inc.php'; //connection details (keep secure)
 
 try {
+    
     //Set up semester table
     if (isset($_POST['pickSem']) && $_POST['semester'] != 'none') {
         $semester = $_POST['semester'];
@@ -24,13 +27,13 @@ try {
     
     $stmt1 = $pdo->prepare($sql);
     $stmt1->execute();
-
+    
     $stmt1->bindColumn(2, $startDate);
     $stmt1->bindColumn(3, $endDate);
     $stmt1->bindColumn(4, $breakStart);
     $stmt1->bindColumn(5, $breakEnd);
     $stmt1->bindColumn(6, $semNum);
-
+    
     $stmt1->fetch();
     $startDate = new DateTime($startDate);
     $startDay = $startDate->format('l, d M');
@@ -41,6 +44,26 @@ try {
     $breakEnd = new DateTime($breakEnd);
     $holFinish = $breakEnd->format('l, d M Y');
     $theseHols = $breakStart->format('l, d M') . " to {$holFinish}";
+    
+    //Welcome paragraph
+    $sql = "SELECT startDate FROM Semester WHERE NOW() BETWEEN startDate AND endDate";
+    $stmt =  $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $stmt->bindColumn(1, $thisSemStartDate);
+
+    $stmt->fetch();
+    $thisSemStartDate = new DateTime($thisSemStartDate);
+    $now = new DateTime();
+    $today = $now->format('l');
+    $weekNumber = 0;
+
+    for ($i = $thisSemStartDate; $i < $now; $i->modify('+7 days')) { //loop over weeks of the semester
+        //only deal with teaching weeks
+        if ($i->getTimestamp() < $breakStart->getTimestamp() || $i->getTimestamp() > $breakEnd->getTimestamp()) { 
+            $weekNumber++; //New week 
+        }
+    }
 
     //Set up assignments table
     $sql = "SELECT c.courseName, a.name, a.duration, a.weekDue, a.dayDue  FROM Assignment a
