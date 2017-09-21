@@ -11,7 +11,6 @@ inc/error.html.php
 homepage.php
 */
 
-<<<<<<< HEAD
 date_default_timezone_set('Pacific/Auckland');
 
 include 'inc/connect.inc.php'; //connection details (keep secure)
@@ -65,105 +64,6 @@ try {
             $weekNumber++; //New week 
         }
     }
-=======
-<div class="row">
-    <h2>Semester dates</h2>
-    <table>
-        <tr>
-            <th>Semester</th>
-            <th>Start date</th>
-            <th>End date</th>
-            <th>Holidays</th>
-        </tr>
-        <?php
-            $stmt1->fetch(PDO::FETCH_BOUND);
-            do { ?>
-                <tr>
-                    <td><?= $semNum; ?>, <?= $startYear; ?></td>
-                    <td><?= $startDay; ?></td>
-                    <td><?= $endDay;?></td>
-                    <td><?= $theseHols; ?></td>
-                </tr>
-        <?php } while ($stmt1->fetch(PDO::FETCH_BOUND)); ?>
-    </table>
-    <h2>Assignments</h2>
-    <table>
-        <tr>
-            <th>Course</th>
-            <th>Assignment</th>
-            <th>Start date</th>
-            <th>Due day</th>
-            <th>Due date</th>
-        </tr>
-        <?php
-        $stmt2->fetch(PDO::FETCH_BOUND);
-        //Build table
-        do { 
-            //Use day of the week and week number to find due date
-            $dateString = $startDate->format('d-m-Y') . '+' . ($aWeek - 1) . ' weeks'; // start date plus assignment week due
-            $aDueWeek = new DateTime($dateString);
-            if ($aDueWeek->getTimestamp() > $breakEnd->getTimestamp()) {
-                $aDueWeek->modify('+ 2 weeks');
-            } 
-            if ($aDayDue != 'Monday') {
-                //Find the next $aDayDue after $aDueWeek 
-                $dateString = 'first '. $aDayDue . " " . $aDueWeek->format('d-m-Y');
-                $dueDate = new DateTime($dateString);
-            } else {
-                $dueDate = $aDueWeek;
-            }
-            $dueDate = $dueDate->format('d M Y');
-            $dateString = $aDueWeek->format('d-m-Y') . '-' . $aStart . ' days';
-            $aStart = new DateTime($dateString);
-            $aStart = $aStart->format('l, d M');
-            ?>
-                <tr>
-                    <td><?= $cName; ?></td>
-                    <td><?= $aName; ?></td>
-                    <td><?= $aStart; ?></td>
-                    <td><?= $aDayDue . ", week " . $aWeek ?></td>
-                    <td><?= $dueDate ?></td>
-                </tr>
-        <?php } while ($stmt2->fetch(PDO::FETCH_BOUND)); ?>
-    </table>
-    <h2>Semester weeks</h2>
-    <table>
-        <tr>
-            <th>Week</th>
-            <th>Mon date</th>
-            <th>Holiday</th>
-        </tr>
-        <?php 
-        //Loop over weeks of the semester
-        for ($i = $startDate; $i < $end; $i->modify('+7 days')) { 
-            //only deal with teaching weeks
-            if ($i->getTimestamp() < $breakStart->getTimestamp() || $i->getTimestamp() > $breakEnd->getTimestamp()) { 
-                $week ++; //New week ?>
-                <tr>
-                    <td><?= $week; ?></td>
-                    <td><?= $i->format('d M'); //Print out Monday's date ?></td>
-                    <td>
-                        <?php 
-                        //Check if there's a public holiday this week
-                        $iEnd = new DateTime($i->format('d-m-Y') . ' + 7 days'); //Set Sunday
-                        foreach ($arrayHol as $holName => $holDate) { 
-                            $holiday = new DateTime($holDate);
-                            if ($holiday->getTimestamp() >= $i->getTimestamp() && $holiday->getTimestamp() < $iEnd->getTimestamp()) {
-                               echo "{$holName}, {$holiday->format('l d M')} "; // give the name and date of the holiday
-                           }
-                        } ?>
-                    </td>
-                <?php 
-                } else { ?>
-                    <td></td>
-                    <td><?= $i->format('d M'); //Print out Monday's date ?></td>
-                    <td>Semester holidays</td>
-                <?php } ?>
-                </tr>
-        <?php } ?>
-    </table>
-</div>
->>>>>>> f2f695ff174a5860e3b94bf43132269839f6355b
 
     //Set up assignments table
     $sql = "SELECT c.courseName, a.name, a.duration, a.weekDue, a.dayDue  FROM Assignment a
