@@ -75,7 +75,7 @@ try {
 
     $stmt2->bindColumn(1, $cName);
     $stmt2->bindColumn(2, $aName);
-    $stmt2->bindColumn(3, $aStart); //duration
+    $stmt2->bindColumn(3, $aStart); //duration indicates assignment start date
     $stmt2->bindColumn(4, $aWeek);
     $stmt2->bindColumn(5, $aDayDue);
 
@@ -87,9 +87,12 @@ try {
     $stmt3->bindColumn(1, $holName);
     $stmt3->bindColumn(2, $holDate);
 
+    $week = 0;
+    $arrayHol = array();
+    while ($stmt3->fetch(PDO::FETCH_BOUND)) {
+        $arrayHol[$holName] = $holDate;
+    }
  
-    // $holiday = new DateTime($holDate);
-
     //Set up semester pick drop down
     $sql = "SELECT semID, YEAR(startDate), semNum FROM Semester";
     $stmt4 = $pdo->prepare($sql);
