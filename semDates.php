@@ -37,6 +37,7 @@ try {
     $stmt1 = $pdo->prepare($sql);
     $stmt1->execute();
 
+    $stmt1->bindColumn(1, $semID);
     $stmt1->bindColumn(2, $startDate);
     $stmt1->bindColumn(3, $endDate);
     $stmt1->bindColumn(4, $breakStart);

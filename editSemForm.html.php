@@ -3,7 +3,7 @@ include 'inc/head.html.php';
 ?>
 
 <div class="row">
-    <h1>Semester Management</h1>
+    <h1>Edit Semester details</h1>
 </div>
 
 <div class="row">
@@ -50,41 +50,3 @@ include 'inc/head.html.php';
         </fieldset>
     </form>
 </div>
-
-<div class="row">
-    <h3>Semesters added</h3>
-    <table>
-        <tr>
-            <th>Semester</th>
-            <th>Start date</th>
-            <th>End date</th>
-            <th>Holidays</th>
-            <th>Edit</th>
-        </tr>
-        <?php
-            $stmt1->fetch(PDO::FETCH_BOUND);
-            do { 
-                $startDate = new DateTime($startDate);
-                $startDay = $startDate->format('l, d M');
-                $startYear = $startDate->format('Y');
-                $end = new DateTime($endDate);
-                $endDay = $end->format('l, d M');
-                $breakStart = new DateTime($breakStart);
-                $breakEnd = new DateTime($breakEnd);
-                $holFinish = $breakEnd->format('l, d M Y');
-                $theseHols = $breakStart->format('l, d M') . " to {$holFinish}";
-                ?>
-                <tr>
-                    <td><?= $semNum; ?>, <?= $startYear; ?></td>
-                    <td><?= $startDay; ?></td>
-                    <td><?= $endDay;?></td>
-                    <td><?= $theseHols; ?></td>
-                    <td><a href="editSem.php?id=<?= $semID ?>">Edit</a> / Delete</td>
-                </tr>
-        <?php } while ($stmt1->fetch(PDO::FETCH_BOUND)); ?>
-    </table>
-    </div>
-
-<?php
-include 'inc/foot.html.php';
-?>
