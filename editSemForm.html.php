@@ -45,7 +45,7 @@ include 'inc/head.html.php';
                 </label>
             </div>
             <div class="large-3 large-offset-3 columns">
-            <button type="submit" class="button small right" name="addSem" value="addSem">Add Semester</button>
+            <button type="submit" class="button small right" name="editSem" value="editSem">Submit</button>
             </div>
         </fieldset>
     </form>
