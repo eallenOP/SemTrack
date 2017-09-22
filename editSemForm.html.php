@@ -15,19 +15,14 @@ include 'inc/head.html.php';
                 <label><input type="radio" name="semNum" value="1"> One</label>
                 <label><input type="radio" name="semNum" value="2"> Two</label>
             </div>
-            <div class="large-3 columns">
-                <label>Year:
-                    <input type="number" name="year" value="<?= $thisYear ?>" />
-                </label>
-            </div>
             <div class="large-3 large-offset-1 columns">
                 <label>Start date (a Monday):
-                    <input type="date" name="semStart" value="" />
+                    <input type="date" name="semStart" value="<?= $start ?>" />
                 </label>
             </div>
             <div class="large-3 columns">
                 <label>End date (a Friday):
-                    <input type="date" name="semEnd" value="" />
+                    <input type="date" name="semEnd" value="<?= $end ?>" />
                 </label>
             </div>
             <div class="large-12 columns">
@@ -36,12 +31,12 @@ include 'inc/head.html.php';
             </div>
             <div class="large-3 columns">
                 <label>Start date (a Monday):
-                    <input type="date" name="breakStart" value="" />
+                    <input type="date" name="breakStart" value="<?= $breakStart ?>" />
                 </label>
             </div>
             <div class="large-3 columns">
                 <label>End date (a Friday):
-                    <input type="date" name="breakEnd" value="" />
+                    <input type="date" name="breakEnd" value="<?= $breakEnd ?>" />
                 </label>
             </div>
             <div class="large-3 large-offset-3 columns">
