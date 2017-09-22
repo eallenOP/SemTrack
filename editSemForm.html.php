@@ -1,5 +1,6 @@
 <?php
 include 'inc/head.html.php';
+$self = strip_tags($_SERVER['PHP_SELF']);
 ?>
 
 <div class="row">
@@ -7,8 +8,10 @@ include 'inc/head.html.php';
 </div>
 
 <div class="row">
-    <form action="semDates.php" method="POST">
+    <form action="<?= $self ?>" method="POST">
         <fieldset>
+        <input type="hidden" name="id" value="<?= $semID; ?>"/>
+
             <legend>Add new semester</legend>
             <div class="large-2 columns">
                 <label for="semNum">Semester:</label>

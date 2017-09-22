@@ -17,18 +17,6 @@ try {
     //Get the right ID from URL
     $semID = $_GET['id'];
 
-    //Retrieve information from database
-    $sql = "SELECT * FROM Semester WHERE semID = $semID";
-    $result = $pdo->query($sql);
-    $result->fetch();
-
-    //Populate the edit form with the current details
-    $semNum = $result['semNum'];
-    $start = $result['startDate'];
-    $end = $result['endDate'];
-    $breakStart = $result['breakStart'];
-    $breakEnd = $result['breakEnd'];
-
     //If submit clicked, update the database with form contents
     if (isset($_POST['editSem'])) {
         $sql = "UPDATE Semester
@@ -39,6 +27,18 @@ try {
                     'breakEnd' = :breakEnd
                 WHERE 'semID = $semID";
     }
+
+    //Retrieve information from database
+    $sql = "SELECT * FROM Semester WHERE semID = $semID";
+    $result = $pdo->query($sql);
+    $result = $result->fetch();
+
+    //Populate the edit form with the current details
+    $semNum = $result['semNum'];
+    $start = $result['startDate'];
+    $end = $result['endDate'];
+    $breakStart = $result['holStart'];
+    $breakEnd = $result['holEnd'];
 
     include 'editSemForm.html.php';
 
