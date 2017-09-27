@@ -17,15 +17,30 @@ try {
     
     //If submit clicked, update the database with form contents
     if (isset($_POST['editSem'])) {
-        $ID = $_POST['id']; 
+        $ID = $_POST['id'];
+        $num = $_POST['semNum'];
+        $start = $_POST['semStart'];
+        $end = $_POST['semEnd'];
+        $breakStart = $_POST['breakStart'];
+        $breakEnd = $_POST['breakEnd'];
+
         $sql = "UPDATE Semester
-                SET 'semNum' = :num,
-                    'startDate' = :start,
-                    'endDate' = :end,
-                    'breakStart' = :breakStart,
-                    'breakEnd' = :breakEnd
-                WHERE 'semID = $ID";
-                include 'semDates.php';
+                SET semNum = :num,
+                    startDate = :start,
+                    endDate = :end,
+                    holStart = :breakStart,
+                    holEnd = :breakEnd
+                WHERE semID = $ID";
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->bindParam(':num', $num);
+        $stmt->bindParam(':start', $start);
+        $stmt->bindParam(':end', $end);
+        $stmt->bindParam(':breakStart', $breakStart);
+        $stmt->bindParam(':breakEnd', $breakEnd);
+        $stmt->execute();
+
+        include 'semDates.php';
     } else {
 
         //Get the right ID from URL

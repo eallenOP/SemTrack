@@ -47,7 +47,7 @@ try {
     
     //Welcome paragraph
     $sql = "SELECT startDate FROM Semester WHERE NOW() BETWEEN startDate AND endDate";
-    $stmt =  $stmt = $pdo->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute();
     
     $stmt->bindColumn(1, $thisSemStartDate);
