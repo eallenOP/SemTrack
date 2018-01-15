@@ -22,7 +22,7 @@ try {
         $semester = $_POST['semester'];
         $sql = "SELECT * FROM Semester WHERE semID = $semester";
     } else {
-        $sql = "SELECT * FROM Semester WHERE NOW() BETWEEN startDate AND endDate";
+        $sql = "SELECT * FROM Semester WHERE NOW() < endDate ORDER BY endDate LIMIT 1";
     }
     
     $stmt1 = $pdo->prepare($sql);
